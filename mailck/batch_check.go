@@ -38,14 +38,14 @@ func handleAll(i interface{}) {
 	}()
 	result, err := Check(message.FromEmail, message.CheckEmail)
 	if err != nil {
-		g.Log().Warningf(message.Ctx, "验证邮箱 %s 时出错：", message.CheckEmail, err.Error())
+		g.Log().Warningf(message.Ctx, "验证邮箱 %s 时出错: %s", message.CheckEmail, err.Error())
 		result = MailserverError
 	}
 	retry := 0
 	for result.IsValid() && retry < 5 {
 		result, err = Check(message.FromEmail, message.CheckEmail)
 		if err != nil {
-			g.Log().Warningf(message.Ctx, "验证邮箱 %s 时出错：", message.CheckEmail, err.Error())
+			g.Log().Warningf(message.Ctx, "验证邮箱 %s 时出错: %s", message.CheckEmail, err.Error())
 			result = MailserverError
 		}
 		retry++
