@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/gogf/gf/v2/container/gset"
 	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/text/gstr"
 	"github.com/panjf2000/ants/v2"
 	"sync"
 )
@@ -39,23 +38,15 @@ func handleAll(i interface{}) {
 	}()
 	result, err := Check(message.FromEmail, message.CheckEmail)
 	if err != nil {
-		if pos := gstr.Pos(err.Error(), "550"); pos == 0 {
-			result = MailserverError
-		} else {
-			g.Log().Error(message.Ctx, err)
-			return
-		}
+		g.Log().Error(message.Ctx, err)
+		result = MailserverError
 	}
 	retry := 0
 	for result.IsValid() && retry < 5 {
 		result, err = Check(message.FromEmail, message.CheckEmail)
 		if err != nil {
-			if pos := gstr.Pos(err.Error(), "550"); pos == 0 {
-				result = MailserverError
-			} else {
-				g.Log().Error(message.Ctx, err)
-				return
-			}
+			g.Log().Error(message.Ctx, err)
+			result = MailserverError
 		}
 		retry++
 	}
