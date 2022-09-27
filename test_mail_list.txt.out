@@ -1,4 +1,3 @@
-{"CheckEmail":"wumengye_not_exists@xiaobai.in","result":"invalid","resultDetail":"mailboxUnavailable","message":"The email username does not exist."}
-{"CheckEmail":"wumengye_not_exists@cartx.ai","result":"invalid","resultDetail":"mailboxUnavailable","message":"The email username does not exist."}
+{"CheckEmail":"hanin44@outlook.sa","result":"error","resultDetail":"mailserverError","message":"The target mailserver responded with an error."}
 {"CheckEmail":"wumengye@xiaobai.in","result":"valid","resultDetail":"mailboxChecked","message":"The email address is valid."}
 {"CheckEmail":"wumengye@cartx.ai","result":"valid","resultDetail":"mailboxChecked","message":"The email address is valid."}

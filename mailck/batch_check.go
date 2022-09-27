@@ -3,6 +3,7 @@ package mailck
 import (
 	"context"
 	"github.com/gogf/gf/v2/container/gset"
+	"github.com/gogf/gf/v2/encoding/gjson"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/panjf2000/ants/v2"
 	"sync"
@@ -50,6 +51,7 @@ func handleAll(i interface{}) {
 		}
 		retry++
 	}
+	g.Log().Warningf(message.Ctx, "验证邮箱 %s 结果: %s", message.CheckEmail, gjson.MustEncodeString(result))
 	message.Results <- &CheckResult{
 		CheckEmail: message.CheckEmail,
 		Result:     result,
