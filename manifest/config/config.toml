@@ -1,0 +1,8 @@
+# Logger.
+[logger]
+    path        = "./data/log/gf-app"
+    level       = "debug"
+    stdout      = true
+
+[settings]
+    fromEmail = "noreply@mailck.io"

@@ -1,0 +1,5 @@
+# Logger.
+[logger]
+    path        = "/zfky_nas/zf_logs/test/utils/email-validation"
+    level       = "info"
+    stdout      = false

@@ -47,7 +47,9 @@ func TestCheck(t *testing.T) {
 	}{
 		{"xxx", InvalidSyntax, nil, InvalidState},
 		{"s.mancke@sdcsdcsdcsdctarent.de", InvalidDomain, nil, InvalidState},
-		{"foo@example.com", InvalidDomain, nil, InvalidState},
+		{"hsisneke@gmail.com", MailboxUnavailable, nil, InvalidState},
+		{"wumengye@gmail.com", Valid, nil, ValidState},
+		{"foo@example.com", NetworkError, nil, InvalidState},
 		{"foo@mailinator.com", Disposable, nil, InvalidState},
 	}
 
