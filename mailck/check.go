@@ -155,18 +155,18 @@ func hostname(mail string) string {
 func singleMX(email string) string {
 
 	var (
-		myList string
+		myList   string
 		mxLength int
 	)
 
 	domain := email[strings.Index(email, "@")+1:]
-	mxrecords, _ := net.LookupMX(domain)	
-	
+	mxrecords, _ := net.LookupMX(domain)
+
 	for _, mx := range mxrecords {
 
 		myList = mx.Host
 		mxLength = len(myList) - 1
 	}
-	
+
 	return myList[:mxLength]
 }
