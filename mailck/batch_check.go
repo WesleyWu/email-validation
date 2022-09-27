@@ -26,7 +26,7 @@ type CheckResult struct {
 }
 
 func init() {
-	pool, _ = ants.NewPoolWithFunc(500, func(i interface{}) {
+	pool, _ = ants.NewPoolWithFunc(5000, func(i interface{}) {
 		handleAll(i)
 	})
 }
