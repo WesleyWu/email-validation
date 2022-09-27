@@ -34,7 +34,9 @@ func init() {
 
 func handleAll(i interface{}) {
 	message, _ := i.(*CheckTask)
-	defer message.Wg.Done()
+	defer func() {
+		message.Wg.Done()
+	}()
 	result, err := Check(message.FromEmail, message.CheckEmail)
 	if err != nil {
 		if pos := gstr.Pos(err.Error(), "550"); pos == 0 {
@@ -86,12 +88,20 @@ func BatchCheck(ctx context.Context, emailSet *gset.StrSet) (resultSlice []*Chec
 	if err != nil {
 		return
 	}
+	g.Log().Infof(ctx, "共 %d 条email需要验证", emailSet.Size())
 	go func() {
 		wg.Wait()
 		close(results)
 	}()
+	count := 0
 	for r := range results {
 		resultSlice = append(resultSlice, r)
+		count++
+		if count%1000 == 0 {
+			g.Log().Infof(ctx, "已验证 %d 条 email", count)
+		}
 	}
+	g.Log().Infof(ctx, "验证完毕 %d 条email", emailSet.Size())
+
 	return
 }
